@@ -6,7 +6,6 @@ class Simulation:
         self.name = bodies
         self.timestep = timestep
         
-
 # F = G m₁m₂ / r²
 
 # body A position = (x₁, y₁)
@@ -20,7 +19,6 @@ class Simulation:
 # r = √r²
 
 # F = Gm₁m₂/r²
-
 
     def calculate_gravity(self, body, other_body):
 
@@ -39,3 +37,19 @@ class Simulation:
         force_y = F * dy / radius
 
         return force_x, force_y
+
+
+#  f = m/a
+
+    def calculate_acceleration(self, body, other_body):
+        
+        fx, fy = self.calculate_gravity(body, other_body)
+
+        a_x = fx / body.mass
+        a_y = fy / body.mass
+
+        return a_x, a_y
+
+    # def calculate_total_acceleration(self, body):
+    #     total_a_x = 0
+    #     total_a_y = 0
