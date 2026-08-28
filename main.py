@@ -220,5 +220,5 @@ percentage_error = (
 )
 
 print(
-    f"The percentage error is {percentage_error}%"
+    f"The percentage error is {percentage_error:.6f}%"
 )
