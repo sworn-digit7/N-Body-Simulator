@@ -2,6 +2,8 @@ import math
 
 
 class Simulation:
+
+    
     def __init__(self, bodies, timestep):
         self.bodies = bodies
         self.timestep = timestep
@@ -108,3 +110,34 @@ class Simulation:
             positions.append([body.position for body in self.bodies])
 
         return positions
+
+    def calculate_kinetic_energy(self, body):
+        vx = body.velocity[0]
+        vy = body.velocity[1]
+
+        speed_squared = vx**2 + vy**2
+
+        return 0.5 * body.mass * speed_squared
+
+    # PE = −G m1 ​m2​​ / r
+
+    def calculate_potential_energy(self, body, other_body):
+
+        G = 6.67430 * 10 ** -11
+
+        dx = other_body.position[0] - body.position[0]
+        dy = other_body.position[1] - body.position[1]
+
+        radius_squared = (dx ** 2) + (dy ** 2)
+        radius = math.sqrt(radius_squared)
+
+        return -(G * body.mass * other_body.mass) / radius
+
+    def calculate_total_energy(self):
+        sun = self.bodies[0]
+        earth = self.bodies[1]
+
+        kinetic_energy = self.calculate_kinetic_energy(sun) + self.calculate_kinetic_energy(earth)
+        potential_energy = self.calculate_potential_energy(sun, earth)
+
+        return kinetic_energy + potential_energy
