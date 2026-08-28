@@ -203,15 +203,10 @@ for i in range(len(bodies)):
 
 
 plt.title("N-Body Simulation")
-
 plt.xlabel("x position (m)")
-
 plt.ylabel("y position (m)")
-
 plt.legend()
-
 plt.grid()
-
 plt.show()
 
 
