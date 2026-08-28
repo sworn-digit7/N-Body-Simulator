@@ -68,9 +68,8 @@ class Simulation:
 
 # vy_new = vy_old + ay × dt
 
-    def update_velocity(self, body):
+    def update_velocity(self, body, ax, ay):
 
-        ax, ay = self.calculate_total_acceleration(body)
 
         new_vx = body.velocity[0] + ax * self.timestep
         new_vy = body.velocity[1] + ay * self.timestep
@@ -85,4 +84,17 @@ class Simulation:
         return new_px, new_py
 
     def step(self):
-        ...
+
+        accelerations = []
+
+        for body in self.bodies:
+            ax, ay = self.calculate_total_acceleration(body)
+            accelerations.append((ax, ay))
+
+        for body, (ax, ay) in zip(self.bodies, accelerations):
+            new_vx, new_vy = self.update_velocity(body, ax, ay)
+            body.velocity = (new_vx, new_vy)
+
+        for body in self.bodies:
+            new_px, new_py = self.update_position(body)
+            body.position = (new_px, new_py)
