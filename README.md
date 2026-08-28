@@ -7,6 +7,7 @@ The project was built from first principles to explore the intersection of **phy
 The simulator can model predefined systems such as the Solar System and Earth–Moon system, as well as completely custom systems supplied by the user. Simulation results are visualised using Matplotlib, while energy conservation is used to evaluate the numerical accuracy and stability of the simulation.
 
 ---
+<img width="638" height="484" alt="image" src="https://github.com/user-attachments/assets/7da780fc-6c06-421f-8574-4b8211708884" />
 
 ## Features
 
