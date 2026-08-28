@@ -34,7 +34,7 @@ class Body:
     @velocity.setter
     def velocity(self, v):
         if not isinstance(v, (list, tuple)) or len(v) != 2:
-            raise ValueError("Position must be given in a coordinate with numbers")
+            raise ValueError("Velocity must be given in a coordinate with numbers")
         if not isinstance(v[0], (float, int)) or not isinstance(v[1], (float, int)):
             raise ValueError("Velocity must be given in a coordinate with numbers")
         self._velocity = v

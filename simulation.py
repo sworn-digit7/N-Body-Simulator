@@ -29,7 +29,7 @@ class Simulation:
 
         radius_squared = (dx ** 2) + (dy ** 2)
 
-        F = (G * body.mass + other_body.mass) / radius_squared
+        F = (G * body.mass * other_body.mass) / radius_squared
 
         radius = math.sqrt(radius_squared)
 
