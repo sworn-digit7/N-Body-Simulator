@@ -98,3 +98,13 @@ class Simulation:
         for body in self.bodies:
             new_px, new_py = self.update_position(body)
             body.position = (new_px, new_py)
+
+    def run(self, number_of_steps):
+
+        positions = []
+
+        for i in range(number_of_steps):
+            self.step()
+            positions.append([body.position for body in self.bodies])
+
+        return positions
