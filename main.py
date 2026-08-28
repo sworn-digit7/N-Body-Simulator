@@ -66,7 +66,17 @@ neptune = Body(
 )
 
 simulation = Simulation(
-    bodies=[sun, earth],
+    bodies=[
+        sun,
+        mercury,
+        venus,
+        earth,
+        mars,
+        jupiter,
+        saturn,
+        uranus,
+        neptune
+    ],
     timestep=3600
 )
 
