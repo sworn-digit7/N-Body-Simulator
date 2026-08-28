@@ -134,10 +134,21 @@ class Simulation:
         return -(G * body.mass * other_body.mass) / radius
 
     def calculate_total_energy(self):
-        sun = self.bodies[0]
-        earth = self.bodies[1]
+        # Calculating the KE by looping through and adding them all
+        kinetic_energy = sum(
+            self.calculate_kinetic_energy(body)
+            for body in self.bodies
+        )
 
-        kinetic_energy = self.calculate_kinetic_energy(sun) + self.calculate_kinetic_energy(earth)
-        potential_energy = self.calculate_potential_energy(sun, earth)
+        potential_energy = 0
+        # Goes through every unique pair of bodies
+        for i in range(len(self.bodies)):
+            # Ensures no body is repeated
+            for j in range(i + 1, len(self.bodies)):
+                # adds the PE
+                potential_energy += self.calculate_potential_energy(
+                    self.bodies[i],
+                    self.bodies[j]
+                )
 
         return kinetic_energy + potential_energy

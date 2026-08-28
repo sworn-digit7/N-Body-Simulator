@@ -65,8 +65,22 @@ neptune = Body(
     velocity=(0, 5430)
 )
 
-simulation = Simulation(
-    bodies=[
+moon = Body(
+    name="Moon",
+    mass=7.342e22,
+    position=(1.496e11 + 3.844e8, 0),
+    velocity=(0, 29780 + 1022)
+)
+
+
+print("\nWhat system would you like to simulate? \n1. Solar System \n2. Earth-Moon \n3. Custom \n")
+choice = int(input("Enter choice: "))
+years = int(input("\nHow many years would you like to simulate? "))
+timestep = int(input("\nEnter timestep in seconds: "))
+
+
+if choice == 1:
+    bodies = [
         sun,
         mercury,
         venus,
@@ -76,36 +90,45 @@ simulation = Simulation(
         saturn,
         uranus,
         neptune
-    ],
-    timestep=3600
+    ]
+
+elif choice == 2:
+    bodies = [
+        earth,
+        moon
+    ]
+
+simulation = Simulation(
+    bodies=bodies,
+    timestep=timestep
 )
+
 
 initial_energy = simulation.calculate_total_energy()
 
-positions = simulation.run(8760)
 
-earth_x = [position[1][0] for position in positions]
-earth_y = [position[1][1] for position in positions]
+total_seconds = years * 365.25 * 24 * 60 * 60
+steps = int(total_seconds / timestep)
+positions = simulation.run(steps)
 
-sun_x = [position[0][0] for position in positions]
-sun_y = [position[0][1] for position in positions]
+for i in range(len(bodies)):
+    x = [position[i][0] for position in positions]
+    y = [position[i][1] for position in positions]
 
-# print(len(positions))
-# print(positions[0])
-# print(positions[-1])
+    plt.plot(x, y, label=bodies[i].name)
 
-# plt.plot(earth_x, earth_y, label="Earth")
-# plt.plot(sun_x, sun_y, label="Sun")
+plt.title("N-Body Simulation")
+plt.xlabel("x position (m)")
+plt.ylabel("y position (m)")
+plt.legend()
+plt.grid()
+plt.show()
 
-# plt.title("Earth's Orbit Around the Sun")
-# plt.xlabel("x position (m)")
-# plt.ylabel("y position (m)")
-# plt.legend()
-# plt.grid()
-# plt.show()
+
+
 
 final_energy = simulation.calculate_total_energy()
 
 percentage_error = abs(final_energy - initial_energy) / abs(initial_energy) * 100
 
-print("The percentage error is" + percentage_error)
+print(f"The percentage error is {percentage_error}")
