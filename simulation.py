@@ -84,3 +84,5 @@ class Simulation:
 
         return new_px, new_py
 
+    def step(self):
+        ...
