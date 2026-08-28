@@ -32,15 +32,6 @@ sun_y = [position[0][1] for position in positions]
 # print(positions[0])
 # print(positions[-1])
 
-# x position
-# against
-# y position
-
-# title
-# x-axis label
-# y-axis label
-# legend
-# grid
 plt.plot(earth_x, earth_y, label="Earth")
 plt.plot(sun_x, sun_y, label="Sun")
 
